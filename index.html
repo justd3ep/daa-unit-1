@@ -1,0 +1,4802 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>DAA Unit I — Mid-Sem Mastery</title>
+
+    <style>
+        :root {
+            --paper: #f6f1e8;
+            --paper2: #fffdf8;
+            --ink: #171717;
+            --muted: #666;
+            --red: #b21f2d;
+            --red2: #8f1722;
+            --line: #d9d0c2;
+            --green: #1e6b45;
+            --shadow: 0 8px 24px rgba(0, 0, 0, .08);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            background: var(--paper);
+            color: var(--ink);
+            font-family:
+                Inter,
+                ui-sans-serif,
+                system-ui,
+                -apple-system,
+                BlinkMacSystemFont,
+                "Segoe UI",
+                sans-serif;
+            line-height: 1.65;
+        }
+
+        a {
+            color: inherit;
+        }
+
+        .container {
+            width: min(1120px, 92%);
+            margin: auto;
+        }
+
+        /* =========================
+   NAVBAR
+========================= */
+
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 20;
+            background: rgba(246, 241, 232, .96);
+            backdrop-filter: blur(8px);
+            border-bottom: 1px solid var(--line);
+        }
+
+        nav {
+            display: flex;
+            gap: 18px;
+            align-items: center;
+            justify-content: space-between;
+            min-height: 58px;
+        }
+
+        .brand {
+            font-weight: 900;
+            letter-spacing: -.03em;
+        }
+
+        .navlinks {
+            display: flex;
+            gap: 14px;
+            flex-wrap: wrap;
+            font-size: .86rem;
+        }
+
+        .navlinks a {
+            text-decoration: none;
+            color: #444;
+        }
+
+        .navlinks a:hover {
+            color: var(--red);
+        }
+
+        /* =========================
+   HERO
+========================= */
+
+        .hero {
+            padding: 54px 0 30px;
+            border-bottom: 1px solid var(--line);
+        }
+
+        .kicker {
+            color: var(--red);
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: .12em;
+            font-size: .78rem;
+        }
+
+        h1 {
+            font-size: clamp(2.2rem, 6vw, 4.5rem);
+            line-height: .98;
+            letter-spacing: -.055em;
+            margin: 10px 0 18px;
+            max-width: 900px;
+        }
+
+        h2 {
+            font-size: 2rem;
+            letter-spacing: -.035em;
+            margin: 0 0 12px;
+        }
+
+        h3 {
+            font-size: 1.22rem;
+            margin: 20px 0 8px;
+        }
+
+        h4 {
+            margin: 16px 0 6px;
+        }
+
+        .lead {
+            font-size: 1.1rem;
+            color: #444;
+            max-width: 850px;
+        }
+
+        .notice {
+            background: #171717;
+            color: #fff;
+            padding: 18px 20px;
+            border-radius: 14px;
+            margin: 22px 0;
+        }
+
+        .notice b {
+            color: #ffb6bc;
+        }
+
+        /* =========================
+   PROGRESS
+========================= */
+
+        .progress-wrap {
+            background: #e4ddd2;
+            height: 10px;
+            border-radius: 99px;
+            overflow: hidden;
+            margin: 10px 0 5px;
+        }
+
+        .progress {
+            height: 100%;
+            width: 0;
+            background: var(--red);
+            transition: .25s;
+        }
+
+        .progress-text {
+            font-size: .85rem;
+            color: var(--muted);
+        }
+
+        /* =========================
+   TOOLBAR
+========================= */
+
+        .toolbar {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin: 22px 0;
+        }
+
+        input[type=search] {
+            flex: 1;
+            min-width: 240px;
+            padding: 12px 14px;
+            border: 1px solid var(--line);
+            border-radius: 10px;
+            background: var(--paper2);
+            font: inherit;
+        }
+
+        button {
+            border: 1px solid #aaa;
+            background: var(--paper2);
+            padding: 11px 15px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 700;
+        }
+
+        button:hover {
+            border-color: var(--red);
+        }
+
+        /* =========================
+   CARDS
+========================= */
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 14px;
+            margin: 28px 0;
+        }
+
+        .card {
+            background: var(--paper2);
+            border: 1px solid var(--line);
+            border-radius: 14px;
+            box-shadow: var(--shadow);
+            overflow: hidden;
+        }
+
+        .card summary {
+            cursor: pointer;
+            padding: 19px 20px;
+            font-weight: 900;
+            list-style: none;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .card summary::-webkit-details-marker {
+            display: none;
+        }
+
+        .card summary:after {
+            content: "+";
+            font-size: 1.4rem;
+            color: var(--red);
+        }
+
+        .card[open] summary:after {
+            content: "−";
+        }
+
+        .card-body {
+            padding: 0 20px 22px;
+            border-top: 1px solid var(--line);
+        }
+
+        .badge {
+            display: inline-block;
+            font-size: .7rem;
+            border: 1px solid #bbb;
+            padding: 3px 7px;
+            border-radius: 99px;
+            margin-left: 7px;
+            color: #555;
+            vertical-align: middle;
+        }
+
+        /* =========================
+   SECTIONS
+========================= */
+
+        .section {
+            margin: 45px 0;
+        }
+
+        .callout {
+            border-left: 4px solid var(--red);
+            background: #f0e9dd;
+            padding: 14px 16px;
+            margin: 15px 0;
+            border-radius: 0 10px 10px 0;
+        }
+
+        .exam {
+            background: #fff6f6;
+            border: 1px solid #e7b8bd;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 16px 0;
+        }
+
+        .tip {
+            background: #eef6f1;
+            border: 1px solid #b8d4c4;
+            padding: 15px;
+            border-radius: 10px;
+        }
+
+        .warn {
+            background: #fff2df;
+            border: 1px solid #e1bf8b;
+            padding: 15px;
+            border-radius: 10px;
+        }
+
+        code {
+            background: #eee7dc;
+            padding: 2px 5px;
+            border-radius: 5px;
+        }
+
+        pre {
+            background: #191919;
+            color: #f6f1e8;
+            padding: 16px;
+            border-radius: 10px;
+            overflow: auto;
+            line-height: 1.5;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 14px 0;
+            background: var(--paper2);
+        }
+
+        th,
+        td {
+            border: 1px solid var(--line);
+            padding: 9px;
+            text-align: left;
+            vertical-align: top;
+        }
+
+        th {
+            background: #eee7dc;
+        }
+
+        ul,
+        ol {
+            padding-left: 24px;
+        }
+
+        .small {
+            font-size: .9rem;
+            color: var(--muted);
+        }
+
+        .math {
+            font-family: Georgia, serif;
+            font-size: 1.06rem;
+        }
+
+        .mark {
+            font-weight: 900;
+            color: var(--red);
+        }
+
+        .checklist label {
+            display: block;
+            padding: 7px 0;
+        }
+
+        .checklist input {
+            margin-right: 8px;
+        }
+
+        footer {
+            border-top: 1px solid var(--line);
+            padding: 35px 0 60px;
+            color: var(--muted);
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        /* =========================
+   MOBILE
+========================= */
+
+        @media(max-width:760px) {
+
+            .grid {
+                grid-template-columns: 1fr;
+            }
+
+            .navlinks {
+                display: none;
+            }
+
+            h1 {
+                font-size: 2.5rem;
+            }
+
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- =========================================================
+     NAVBAR
+========================================================= -->
+
+    <header>
+
+        <div class="container">
+
+            <nav>
+
+                <div class="brand">
+                    DAA / UNIT I
+                </div>
+
+                <div class="navlinks">
+
+                    <a href="#roadmap">Roadmap</a>
+
+                    <a href="#topics">Topics</a>
+
+                    <a href="#recurrences">Recurrences</a>
+
+                    <a href="#exam">Exam Mode</a>
+
+                    <a href="#checklist">Checklist</a>
+
+                </div>
+
+            </nav>
+
+        </div>
+
+    </header>
+
+
+    <!-- =========================================================
+     MAIN
+========================================================= -->
+
+    <main class="container">
+
+
+        <!-- =========================================================
+     HERO
+========================================================= -->
+
+        <section class="hero">
+
+            <div class="kicker">
+                IPU Mid-Sem Preparation
+            </div>
+
+            <h1>
+                Unit I — Complete Theory + Numericals
+            </h1>
+
+            <p class="lead">
+
+                This is the harder, calculation-heavy unit.
+
+                The goal is not just to recognize definitions:
+
+                you should be able to
+
+                <b>derive, solve, trace, compare, and write exam answers.</b>
+
+            </p>
+
+            <div class="notice">
+
+                <b>Your previous mid-sem paper:</b>
+
+                Big-O / Big-Omega, Merge Sort recurrence,
+
+                Disjoint Sets, Quick Sort partitioning + best/worst complexity,
+
+                and Master Theorem were directly tested.
+
+                This guide goes deeper so a changed question does not catch you.
+
+            </div>
+
+
+            <div class="progress-wrap">
+
+                <div class="progress" id="progress">
+                </div>
+
+            </div>
+
+            <div class="progress-text" id="progressText">
+
+                0 / 0 topics completed
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =========================================================
+     ROADMAP
+========================================================= -->
+
+        <section id="roadmap" class="section">
+
+            <h2>
+                How to study this unit
+            </h2>
+
+            <p>
+                Do not read this like a textbook from top to bottom and assume you know it.
+                Use this order:
+            </p>
+
+            <ol>
+
+                <li>
+                    <b>Asymptotic analysis</b>
+                    — learn what O, Ω, Θ mean mathematically.
+                </li>
+
+                <li>
+                    <b>Recurrences</b>
+                    — learn iteration, recursion tree, substitution and Master Theorem.
+                </li>
+
+                <li>
+                    <b>Disjoint Sets</b>
+                    — understand Make-Set, Find, Union and the forest representation.
+                </li>
+
+                <li>
+                    <b>Divide and Conquer</b>
+                    — understand the general pattern.
+                </li>
+
+                <li>
+                    <b>Binary Search → Merge Sort → Quick Sort</b>
+                    — trace examples by hand.
+                </li>
+
+                <li>
+                    <b>Exam practice</b>
+                    — solve without looking at the notes.
+                </li>
+
+            </ol>
+
+            <div class="callout">
+
+                <b>Rule:</b>
+
+                If you cannot reproduce a numerical on blank paper,
+
+                you do not yet “know” the topic.
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =========================================================
+     TOPICS
+========================================================= -->
+
+        <section id="topics" class="section">
+
+            <h2>
+                Core Topics
+            </h2>
+
+
+            <div class="toolbar">
+
+                <input id="search" type="search" placeholder="Search: Master Theorem, Quick Sort, Big-O...">
+
+                <button onclick="toggleAll(true)">
+                    Expand all
+                </button>
+
+                <button onclick="toggleAll(false)">
+                    Collapse all
+                </button>
+
+            </div>
+
+
+            <div id="cards">
+
+
+                <!-- =========================================================
+     TOPIC 1
+========================================================= -->
+
+                <details class="card topic" data-title="algorithm efficiency time space complexity analysis">
+
+                    <summary>
+
+                        1. Algorithm Analysis & Efficiency
+
+                        <span class="badge">
+                            2–4 marks
+                        </span>
+
+                    </summary>
+
+
+                    <div class="card-body">
+
+                        <h3>
+                            What is algorithm analysis?
+                        </h3>
+
+                        <p>
+
+                            Algorithm analysis studies how the resource requirements of an algorithm grow as input size
+                            <code>n</code>
+                            grows.
+
+                            The two major resources are:
+
+                        </p>
+
+                        <ul>
+
+                            <li>
+                                <b>Time complexity:</b>
+                                how the number of basic operations grows with input size.
+                            </li>
+
+                            <li>
+                                <b>Space complexity:</b>
+                                how much extra memory is required as input size grows.
+                            </li>
+
+                        </ul>
+
+
+                        <h3>
+                            Why not simply measure seconds?
+                        </h3>
+
+                        <ul>
+
+                            <li>
+                                Different machines have different speeds.
+                            </li>
+
+                            <li>
+                                Implementation and compiler affect runtime.
+                            </li>
+
+                            <li>
+                                We care about growth for large inputs.
+                            </li>
+
+                            <li>
+                                Asymptotic analysis gives a machine-independent comparison.
+                            </li>
+
+                        </ul>
+
+
+                        <h3>
+                            Cases of analysis
+                        </h3>
+
+                        <table>
+
+                            <tr>
+                                <th>Case</th>
+                                <th>Meaning</th>
+                                <th>Example</th>
+                            </tr>
+
+                            <tr>
+                                <td>Best case</td>
+                                <td>
+                                    Minimum work for an input of size n
+                                </td>
+                                <td>
+                                    Linear search finds target at first position
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>Worst case</td>
+                                <td>
+                                    Maximum work for an input of size n
+                                </td>
+                                <td>
+                                    Linear search finds target at last position / absent
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>Average case</td>
+                                <td>
+                                    Expected work over a defined input distribution
+                                </td>
+                                <td>
+                                    Linear search under a uniform-position assumption
+                                </td>
+                            </tr>
+
+                        </table>
+
+
+                        <div class="exam">
+
+                            <b>Exam answer:</b>
+
+                            “Algorithm analysis determines the time and space resources required by an algorithm as a
+                            function of input size. Time complexity measures operation growth; space complexity measures
+                            memory growth.”
+
+                        </div>
+
+                    </div>
+
+                </details>
+
+
+
+                <!-- =========================================================
+     TOPIC 2
+========================================================= -->
+
+                <details class="card topic" data-title="asymptotic notation big o omega theta little o little omega">
+
+                    <summary>
+
+                        2. Asymptotic Notations — O, Ω, Θ, o, ω
+
+                        <span class="badge">
+                            High priority
+                        </span>
+
+                    </summary>
+
+
+                    <div class="card-body">
+
+                        <h3>
+                            The core idea
+                        </h3>
+
+                        <p>
+
+                            Asymptotic notation describes the growth rate of a function while ignoring constant factors
+                            and lower-order terms.
+
+                        </p>
+
+
+                        <h3>
+                            Big-O: upper bound
+                        </h3>
+
+                        <p class="math">
+
+                            <b>
+                                f(n) = O(g(n))
+                            </b>
+
+                            if there exist constants
+                            <b>c &gt; 0</b>
+                            and
+                            <b>n₀</b>
+                            such that:
+
+                        </p>
+
+                        <p class="math">
+
+                            <b>
+                                0 ≤ f(n) ≤ c·g(n)
+                            </b>
+
+                            for all
+                            n ≥ n₀.
+
+                        </p>
+
+                        <p>
+
+                            Interpretation:
+
+                            beyond some point, f does not grow faster than a constant multiple of g.
+
+                        </p>
+
+
+                        <h3>
+                            Big-Ω: lower bound
+                        </h3>
+
+                        <p class="math">
+
+                            <b>
+                                f(n) = Ω(g(n))
+                            </b>
+
+                            if there exist
+                            c &gt; 0
+                            and
+                            n₀
+                            such that:
+
+                        </p>
+
+                        <p class="math">
+
+                            <b>
+                                0 ≤ c·g(n) ≤ f(n)
+                            </b>
+
+                            for all
+                            n ≥ n₀.
+
+                        </p>
+
+
+                        <h3>
+                            Big-Θ: tight bound
+                        </h3>
+
+                        <p class="math">
+
+                            <b>
+                                f(n) = Θ(g(n))
+                            </b>
+
+                            if there exist
+                            c₁,c₂ &gt; 0
+                            and
+                            n₀
+                            such that:
+
+                        </p>
+
+                        <p class="math">
+
+                            <b>
+                                0 ≤ c₁g(n) ≤ f(n) ≤ c₂g(n)
+                            </b>
+
+                            for all
+                            n ≥ n₀.
+
+                        </p>
+
+
+                        <h3>
+                            Little-o and little-ω
+                        </h3>
+
+                        <ul>
+
+                            <li>
+                                <code>f(n) = o(g(n))</code>:
+                                f grows strictly slower than g.
+                            </li>
+
+                            <li>
+                                <code>f(n) = ω(g(n))</code>:
+                                f grows strictly faster than g.
+                            </li>
+
+                        </ul>
+
+
+                        <table>
+
+                            <tr>
+                                <th>Notation</th>
+                                <th>Meaning</th>
+                                <th>Think</th>
+                            </tr>
+
+                            <tr>
+                                <td>O(g)</td>
+                                <td>Upper bound</td>
+                                <td>“at most this order”</td>
+                            </tr>
+
+                            <tr>
+                                <td>Ω(g)</td>
+                                <td>Lower bound</td>
+                                <td>“at least this order”</td>
+                            </tr>
+
+                            <tr>
+                                <td>Θ(g)</td>
+                                <td>Tight bound</td>
+                                <td>“exact asymptotic order”</td>
+                            </tr>
+
+                            <tr>
+                                <td>o(g)</td>
+                                <td>Strictly smaller growth</td>
+                                <td>ratio → 0</td>
+                            </tr>
+
+                            <tr>
+                                <td>ω(g)</td>
+                                <td>Strictly larger growth</td>
+                                <td>ratio → ∞</td>
+                            </tr>
+
+                        </table>
+
+
+                        <h3>
+                            Example: prove 3n² + 5n + 7 = O(n²)
+                        </h3>
+
+                        <p>
+
+                            For
+                            n ≥ 1,
+                            n ≤ n²
+                            and
+                            1 ≤ n².
+
+                            Therefore:
+
+                        </p>
+
+                        <p class="math">
+
+                            3n² + 5n + 7
+
+                            ≤
+
+                            3n² + 5n² + 7n²
+
+                            =
+
+                            15n².
+
+                        </p>
+
+                        <p>
+
+                            Choose
+                            c = 15
+                            and
+                            n₀ = 1.
+
+                            Hence:
+
+                            <b>
+                                3n² + 5n + 7 = O(n²)
+                            </b>
+
+                        </p>
+
+
+                        <h3>
+                            Example: Θ
+                        </h3>
+
+                        <p>
+
+                            For
+
+                            <code>
+f(n)=4n²+2n+9
+</code>
+
+                            the dominant term is
+                            n².
+
+                            We can bound it above and below by constant multiples of n²,
+
+                            so:
+
+                            <b>
+                                f(n)=Θ(n²)
+                            </b>
+
+                        </p>
+
+
+                        <div class="warn">
+
+                            <b>Common mistake:</b>
+
+                            “O means exact complexity.”
+
+                            No.
+
+                            O is an upper asymptotic bound.
+
+                            Θ is the tight bound.
+
+                        </div>
+
+
+                        <div class="exam">
+
+                            <b>Likely 2-mark question:</b>
+
+                            Define Big-O and Big-Ω with examples.
+
+                            Write the formal inequality and one simple example for each.
+
+                        </div>
+
+                    </div>
+
+                </details>
+
+
+
+                <!-- =========================================================
+     TOPIC 3
+========================================================= -->
+
+                <details class="card topic" data-title="growth functions order log n n nlogn n2 exponential factorial">
+
+                    <summary>
+
+                        3. Growth of Functions
+
+                        <span class="badge">
+                            Foundation
+                        </span>
+
+                    </summary>
+
+
+                    <div class="card-body">
+
+                        <h3>
+                            Common growth order
+                        </h3>
+
+                        <p>
+
+                            For large n, a useful ordering is:
+
+                        </p>
+
+                        <p class="math">
+
+                            <b>
+                                1 &lt; log n &lt; √n &lt; n &lt; n log n &lt; n² &lt; n³ &lt; 2ⁿ &lt; n!
+                            </b>
+
+                        </p>
+
+
+                        <h3>
+                            Rules for simplifying complexity
+                        </h3>
+
+                        <ul>
+
+                            <li>
+                                Drop constant multipliers:
+                                <code>7n → Θ(n)</code>.
+                            </li>
+
+                            <li>
+                                Keep the dominant term:
+                                <code>n²+n+1 → Θ(n²)</code>.
+                            </li>
+
+                            <li>
+                                Nested loops usually multiply their iteration counts.
+                            </li>
+
+                            <li>
+                                Sequential blocks usually add, then keep the dominant term.
+                            </li>
+
+                            <li>
+                                Halving/doubling repeatedly usually produces
+                                <code>log n</code>.
+                            </li>
+
+                        </ul>
+
+
+                        <h3>
+                            Example
+                        </h3>
+
+                        <pre>
+for i = 1 to n
+    for j = 1 to n
+        constant work
+</pre>
+
+                        <p>
+
+                            There are approximately
+                            n×n
+                            operations,
+
+                            so complexity is
+
+                            <b>
+                                Θ(n²)
+                            </b>.
+
+                        </p>
+
+
+                        <pre>
+i = n
+
+while i > 1
+    i = floor(i/2)
+</pre>
+
+                        <p>
+
+                            The number of halvings is
+                            Θ(log n),
+
+                            so complexity is
+
+                            <b>
+                                Θ(log n)
+                            </b>.
+
+                        </p>
+
+                    </div>
+
+                </details>
+
+
+
+                <!-- =========================================================
+     TOPIC 4
+========================================================= -->
+
+                <details class="card topic" data-title="recurrence relation recursive algorithms">
+
+                    <summary>
+
+                        4. Recurrence Relations — What They Mean
+
+                        <span class="badge">
+                            High priority
+                        </span>
+
+                    </summary>
+
+
+                    <div class="card-body">
+
+                        <p>
+
+                            A recurrence relation expresses the running time of a recursive algorithm in terms of the
+                            running time on smaller inputs.
+
+                        </p>
+
+
+                        <h3>
+                            General divide-and-conquer form
+                        </h3>
+
+                        <p class="math">
+
+                            <b>
+                                T(n) = aT(n/b) + f(n)
+                            </b>
+
+                        </p>
+
+                        <ul>
+
+                            <li>
+                                <b>a:</b>
+                                number of recursive subproblems.
+                            </li>
+
+                            <li>
+                                <b>n/b:</b>
+                                size of each subproblem.
+                            </li>
+
+                            <li>
+                                <b>f(n):</b>
+                                work outside the recursive calls.
+                            </li>
+
+                        </ul>
+
+
+                        <h3>
+                            Examples
+                        </h3>
+
+                        <table>
+
+                            <tr>
+                                <th>Algorithm</th>
+                                <th>Recurrence</th>
+                                <th>Result</th>
+                            </tr>
+
+                            <tr>
+                                <td>Binary Search</td>
+                                <td>
+                                    T(n)=T(n/2)+Θ(1)
+                                </td>
+                                <td>
+                                    Θ(log n)
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>Merge Sort</td>
+                                <td>
+                                    T(n)=2T(n/2)+Θ(n)
+                                </td>
+                                <td>
+                                    Θ(n log n)
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>Balanced Quick Sort</td>
+                                <td>
+                                    T(n)=2T(n/2)+Θ(n)
+                                </td>
+                                <td>
+                                    Θ(n log n)
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>Worst Quick Sort</td>
+                                <td>
+                                    T(n)=T(n−1)+Θ(n)
+                                </td>
+                                <td>
+                                    Θ(n²)
+                                </td>
+                            </tr>
+
+                        </table>
+
+
+                        <div class="callout">
+
+                            <b>Important:</b>
+
+                            The recurrence is not the final complexity.
+
+                            You still have to solve it.
+
+                        </div>
+
+                    </div>
+
+                </details>
+
+
+
+                <!-- =========================================================
+     TOPIC 5
+========================================================= -->
+
+                <details class="card topic" data-title="recurrence iteration substitution recursion tree method">
+
+                    <summary>
+
+                        5. Solving Recurrences — Iteration, Recursion Tree, Substitution
+
+                        <span class="badge">
+                            High priority
+                        </span>
+
+                    </summary>
+
+
+                    <div class="card-body">
+
+                        <h3>
+                            A. Iteration / expansion method
+                        </h3>
+
+                        <p>
+
+                            Repeatedly expand the recurrence until reaching the base case.
+
+                        </p>
+
+
+                        <h4>
+                            Example: T(n)=T(n/2)+1
+                        </h4>
+
+                        <pre>
+T(n) = T(n/2) + 1
+     = T(n/4) + 1 + 1
+     = T(n/8) + 3
+     ...
+     = T(n/2^k) + k
+</pre>
+
+                        <p>
+
+                            Stop when:
+
+                        </p>
+
+                        <p class="math">
+
+                            n/2ᵏ=1
+
+                        </p>
+
+                        <p>
+
+                            Therefore:
+
+                        </p>
+
+                        <p class="math">
+
+                            2ᵏ=n
+
+                        </p>
+
+                        <p>
+
+                            so:
+
+                        </p>
+
+                        <p class="math">
+
+                            k=log₂n
+
+                        </p>
+
+                        <p>
+
+                            Therefore:
+
+                            <b>
+                                T(n)=Θ(log n)
+                            </b>
+
+                        </p>
+
+
+                        <h3>
+                            B. Recursion tree method
+                        </h3>
+
+                        <p>
+
+                            Draw the cost at each recursion level,
+
+                            add the cost per level,
+
+                            then multiply by the number of levels.
+
+                        </p>
+
+
+                        <h4>
+                            Merge Sort
+                        </h4>
+
+                        <p class="math">
+
+                            T(n)=2T(n/2)+n
+
+                        </p>
+
+
+                        <table>
+
+                            <tr>
+                                <th>Level</th>
+                                <th># subproblems</th>
+                                <th>Cost each</th>
+                                <th>Total</th>
+                            </tr>
+
+                            <tr>
+                                <td>0</td>
+                                <td>1</td>
+                                <td>n</td>
+                                <td>n</td>
+                            </tr>
+
+                            <tr>
+                                <td>1</td>
+                                <td>2</td>
+                                <td>n/2</td>
+                                <td>n</td>
+                            </tr>
+
+                            <tr>
+                                <td>2</td>
+                                <td>4</td>
+                                <td>n/4</td>
+                                <td>n</td>
+                            </tr>
+
+                            <tr>
+                                <td>...</td>
+                                <td>...</td>
+                                <td>...</td>
+                                <td>n</td>
+                            </tr>
+
+                            <tr>
+                                <td>log₂n</td>
+                                <td>n</td>
+                                <td>1</td>
+                                <td>n</td>
+                            </tr>
+
+                        </table>
+
+                        <p>
+
+                            There are
+                            Θ(log n)
+                            levels,
+
+                            each costing
+                            Θ(n),
+
+                            so:
+
+                            <b>
+                                Θ(n log n)
+                            </b>
+
+                        </p>
+
+
+                        <h3>
+                            C. Substitution method
+                        </h3>
+
+                        <p>
+
+                            Usually consists of three steps:
+
+                        </p>
+
+                        <ol>
+
+                            <li>
+                                Guess the asymptotic bound.
+                            </li>
+
+                            <li>
+                                Assume it holds for smaller inputs.
+                            </li>
+
+                            <li>
+                                Substitute the assumption into the recurrence and prove the bound.
+                            </li>
+
+                        </ol>
+
+
+                        <h4>
+                            Example idea
+                        </h4>
+
+                        <p>
+
+                            For:
+
+                            <code>
+T(n)=2T(n/2)+n
+</code>
+
+                            guess:
+
+                            <code>
+T(n)=O(n log n)
+</code>.
+
+                            Assume:
+
+                            <code>
+T(n/2)≤c(n/2)log(n/2)
+</code>,
+
+                            substitute,
+
+                            simplify,
+
+                            and choose constants so the inequality holds.
+
+                        </p>
+
+
+                        <div class="exam">
+
+                            <b>Exam:</b>
+
+                            If asked to solve a recurrence and no method is specified,
+
+                            state the method you are using and show enough expansion/algebra to justify the final bound.
+
+                        </div>
+
+                    </div>
+
+                </details>
+
+
+
+                <!-- =========================================================
+     TOPIC 6
+========================================================= -->
+
+                <details class="card topic" data-title="master theorem master method cases a b f n">
+
+                    <summary>
+
+                        6. Master Theorem
+
+                        <span class="badge">
+                            Very high priority
+                        </span>
+
+                    </summary>
+
+
+                    <div class="card-body">
+
+                        <h3>
+                            Standard form
+                        </h3>
+
+                        <p class="math">
+
+                            <b>
+                                T(n)=aT(n/b)+f(n)
+                            </b>
+
+                        </p>
+
+                        <p>
+
+                            where:
+
+                        </p>
+
+                        <ul>
+
+                            <li>
+                                a ≥ 1
+                            </li>
+
+                            <li>
+                                b &gt; 1
+                            </li>
+
+                        </ul>
+
+
+                        <p>
+
+                            Compare:
+
+                            <code>
+f(n)
+</code>
+
+                            with:
+
+                            <code>
+n^(log_b a)
+</code>
+
+                        </p>
+
+
+                        <h3>
+                            Case 1 — recursion dominates
+                        </h3>
+
+                        <p>
+
+                            If:
+
+                            <code>
+f(n)=O(n^(log_b a−ε))
+</code>
+
+                            for some
+                            ε&gt;0:
+
+                        </p>
+
+                        <p class="math">
+
+                            <b>
+                                T(n)=Θ(n^(log_b a))
+                            </b>
+
+                        </p>
+
+
+                        <h3>
+                            Case 2 — same order
+                        </h3>
+
+                        <p>
+
+                            If:
+
+                            <code>
+f(n)=Θ(n^(log_b a) log^k n)
+</code>
+
+                            then:
+
+                        </p>
+
+                        <p class="math">
+
+                            <b>
+                                T(n)=Θ(n^(log_b a) log^(k+1)n)
+                            </b>
+
+                        </p>
+
+
+                        <h3>
+                            Case 3 — outside work dominates
+                        </h3>
+
+                        <p>
+
+                            If:
+
+                            <code>
+f(n)=Ω(n^(log_b a+ε))
+</code>
+
+                            together with the regularity condition,
+
+                            then:
+
+                        </p>
+
+                        <p class="math">
+
+                            <b>
+                                T(n)=Θ(f(n))
+                            </b>
+
+                        </p>
+
+
+                        <h3>
+                            Example 1 — Merge Sort
+                        </h3>
+
+                        <p class="math">
+
+                            T(n)=2T(n/2)+n
+
+                        </p>
+
+                        <ul>
+
+                            <li>
+                                a=2
+                            </li>
+
+                            <li>
+                                b=2
+                            </li>
+
+                            <li>
+                                n^(log₂2)=n
+                            </li>
+
+                            <li>
+                                f(n)=n
+                            </li>
+
+                            <li>
+                                Case 2
+                            </li>
+
+                        </ul>
+
+                        <p>
+
+                            <b>
+                                Answer: Θ(n log n)
+                            </b>
+
+                        </p>
+
+
+                        <h3>
+                            Example 2
+                        </h3>
+
+                        <p class="math">
+
+                            T(n)=4T(n/2)+n
+
+                        </p>
+
+                        <ul>
+
+                            <li>
+                                a=4
+                            </li>
+
+                            <li>
+                                b=2
+                            </li>
+
+                            <li>
+                                n^(log₂4)=n²
+                            </li>
+
+                            <li>
+                                f(n)=n
+                            </li>
+
+                            <li>
+                                Case 1
+                            </li>
+
+                        </ul>
+
+                        <p>
+
+                            <b>
+                                Answer: Θ(n²)
+                            </b>
+
+                        </p>
+
+
+                        <h3>
+                            Example 3
+                        </h3>
+
+                        <p class="math">
+
+                            T(n)=T(n/2)+n
+
+                        </p>
+
+                        <ul>
+
+                            <li>
+                                a=1
+                            </li>
+
+                            <li>
+                                b=2
+                            </li>
+
+                            <li>
+                                n^(log₂1)=1
+                            </li>
+
+                            <li>
+                                f(n)=n
+                            </li>
+
+                            <li>
+                                Case 3
+                            </li>
+
+                        </ul>
+
+                        <p>
+
+                            <b>
+                                Answer: Θ(n)
+                            </b>
+
+                        </p>
+
+
+                        <div class="warn">
+
+                            <b>Do not blindly use Master Theorem.</b>
+
+                            It applies to recurrences matching the standard divide-and-conquer form.
+
+                            For example:
+
+                            <code>
+T(n)=T(n−1)+n
+</code>
+
+                            is not a direct Master Theorem case.
+
+                        </div>
+
+
+                        <div class="exam">
+
+                            <b>Previous paper:</b>
+
+                            “Solve T(n)=2T(n/2)+n using Master Theorem”
+
+                            was a 4-mark style question.
+
+                            Write:
+
+                            <b>
+                                a, b, f(n), n^(log_ba), case, final Θ result.
+                            </b>
+
+                        </div>
+
+                    </div>
+
+                </details>
+
+
+
+                <!-- =========================================================
+     TOPIC 7
+========================================================= -->
+
+                <details class="card topic" data-title="disjoint sets make set find union union find">
+
+                    <summary>
+
+                        7. Disjoint Sets / Union-Find
+
+                        <span class="badge">
+                            2–4 marks
+                        </span>
+
+                    </summary>
+
+
+                    <div class="card-body">
+
+                        <h3>
+                            What is a disjoint-set data structure?
+                        </h3>
+
+                        <p>
+
+                            It maintains a collection of mutually disjoint sets.
+
+                            Every element belongs to exactly one set.
+
+                        </p>
+
+
+                        <h3>
+                            Three fundamental operations
+                        </h3>
+
+                        <table>
+
+                            <tr>
+                                <th>Operation</th>
+                                <th>Purpose</th>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    <b>Make-Set(x)</b>
+                                </td>
+                                <td>
+                                    Create a new set containing only x.
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    <b>Find(x)</b>
+                                </td>
+                                <td>
+                                    Return the representative/root of the set containing x.
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    <b>Union(x,y)</b>
+                                </td>
+                                <td>
+                                    Merge the sets containing x and y.
+                                </td>
+                            </tr>
+
+                        </table>
+
+
+                        <h3>
+                            Example
+                        </h3>
+
+                        <pre>
+Initially:
+
+{1} {2} {3} {4} {5}
+
+
+Union(1,2):
+
+{1,2} {3} {4} {5}
+
+
+Union(3,4):
+
+{1,2} {3,4} {5}
+
+
+Union(2,3):
+
+{1,2,3,4} {5}
+</pre>
+
+
+                        <p>
+
+                            Now:
+
+                            <code>
+Find(4)
+</code>
+
+                            returns the representative of the set containing 4,
+
+                            which is the same set as 1, 2 and 3.
+
+                        </p>
+
+
+                        <h3>
+                            Why is it used in algorithms?
+                        </h3>
+
+                        <p>
+
+                            It is particularly useful for detecting whether adding an edge would create a cycle while
+                            constructing a spanning tree.
+
+                            Kruskal's MST algorithm is the classic example.
+
+                        </p>
+
+
+                        <h3>
+                            Forest representation
+                        </h3>
+
+                        <p>
+
+                            Each set can be represented as a rooted tree.
+
+                            Each node points to a parent.
+
+                            The root is the representative.
+
+                        </p>
+
+
+                        <h3>
+                            Union by rank / size
+                        </h3>
+
+                        <p>
+
+                            When merging two trees,
+
+                            attach the smaller/shallower tree under the larger/deeper one.
+
+                            This prevents tall trees.
+
+                        </p>
+
+
+                        <h3>
+                            Path compression
+                        </h3>
+
+                        <p>
+
+                            During
+                            <code>
+Find(x)
+</code>,
+
+                            make nodes on the path point directly to the root.
+
+                            Future Find operations become much faster.
+
+                        </p>
+
+
+                        <pre>
+Find(x):
+
+    if parent[x] != x:
+        parent[x] = Find(parent[x])
+
+    return parent[x]
+</pre>
+
+
+                        <p>
+
+                            With both union by rank/size and path compression,
+
+                            the amortized cost is:
+
+                            <b>
+                                O(α(n))
+                            </b>
+
+                            per operation,
+
+                            where α is the inverse Ackermann function.
+
+                        </p>
+
+
+                        <div class="exam">
+
+                            <b>Previous paper:</b>
+
+                            “State two operations on Disjoint Sets and role.”
+
+                            Safest answer:
+
+                            list Make-Set, Find and Union,
+
+                            then explain any two if the wording says two.
+
+                        </div>
+
+                    </div>
+
+                </details>
+
+
+
+                <!-- =========================================================
+     TOPIC 8
+========================================================= -->
+
+                <details class="card topic" data-title="divide and conquer general method paradigm">
+
+                    <summary>
+
+                        8. Divide and Conquer — General Method
+
+                        <span class="badge">
+                            4 marks
+                        </span>
+
+                    </summary>
+
+
+                    <div class="card-body">
+
+                        <h3>
+                            Three stages
+                        </h3>
+
+                        <ol>
+
+                            <li>
+                                <b>Divide:</b>
+                                split the problem into smaller subproblems.
+                            </li>
+
+                            <li>
+                                <b>Conquer:</b>
+                                solve each subproblem recursively.
+                            </li>
+
+                            <li>
+                                <b>Combine:</b>
+                                combine the subproblem solutions into the full solution.
+                            </li>
+
+                        </ol>
+
+
+                        <h3>
+                            Generic structure
+                        </h3>
+
+                        <pre>
+DivideAndConquer(problem):
+
+    if problem is small:
+        solve directly
+
+    else:
+        divide problem into subproblems
+
+        solve each subproblem recursively
+
+        combine their solutions
+</pre>
+
+
+                        <h3>
+                            Classic examples
+                        </h3>
+
+                        <table>
+
+                            <tr>
+                                <th>Algorithm</th>
+                                <th>Divide</th>
+                                <th>Conquer</th>
+                                <th>Combine</th>
+                            </tr>
+
+                            <tr>
+                                <td>Binary Search</td>
+                                <td>Choose middle</td>
+                                <td>Search one half</td>
+                                <td>Almost none</td>
+                            </tr>
+
+                            <tr>
+                                <td>Merge Sort</td>
+                                <td>Split array into halves</td>
+                                <td>Sort each half</td>
+                                <td>Merge sorted halves</td>
+                            </tr>
+
+                            <tr>
+                                <td>Quick Sort</td>
+                                <td>Partition around pivot</td>
+                                <td>Sort left/right</td>
+                                <td>Usually implicit after partition</td>
+                            </tr>
+
+                        </table>
+
+
+                        <h3>
+                            Advantages
+                        </h3>
+
+                        <ul>
+
+                            <li>
+                                Often reduces large problems into manageable subproblems.
+                            </li>
+
+                            <li>
+                                Natural recursive structure.
+                            </li>
+
+                            <li>
+                                Can enable efficient parallelization.
+                            </li>
+
+                        </ul>
+
+
+                        <h3>
+                            Disadvantages
+                        </h3>
+
+                        <ul>
+
+                            <li>
+                                Recursion adds overhead.
+                            </li>
+
+                            <li>
+                                Unbalanced division can destroy efficiency.
+                            </li>
+
+                            <li>
+                                Combine cost can be significant.
+                            </li>
+
+                        </ul>
+
+                    </div>
+
+                </details>
+
+
+
+                <!-- =========================================================
+     TOPIC 9
+========================================================= -->
+
+                <details class="card topic" data-title="binary search algorithm complexity recurrence">
+
+                    <summary>
+
+                        9. Binary Search
+
+                        <span class="badge">
+                            2–4 marks
+                        </span>
+
+                    </summary>
+
+
+                    <div class="card-body">
+
+                        <h3>
+                            Requirement
+                        </h3>
+
+                        <p>
+
+                            The array/list must be
+
+                            <b>
+                                sorted
+                            </b>.
+
+                        </p>
+
+
+                        <h3>
+                            Idea
+                        </h3>
+
+                        <p>
+
+                            Compare the target with the middle element.
+
+                            If target is smaller,
+
+                            discard the right half.
+
+                            If larger,
+
+                            discard the left half.
+
+                            Repeat.
+
+                        </p>
+
+
+                        <h3>
+                            Example
+                        </h3>
+
+                        <p>
+
+                            Array:
+
+                            <code>
+[10,20,30,40,50,60,70,80,90]
+</code>
+
+                            target = 70.
+
+                        </p>
+
+                        <ol>
+
+                            <li>
+                                Middle = 50 → 70 is larger → search right half.
+                            </li>
+
+                            <li>
+                                Middle of remaining region = 70 → found.
+                            </li>
+
+                        </ol>
+
+
+                        <h3>
+                            Pseudocode
+                        </h3>
+
+                        <pre>
+BinarySearch(A, low, high, x):
+
+    while low &lt;= high:
+
+        mid = floor((low + high)/2)
+
+        if A[mid] == x:
+            return mid
+
+        else if x &lt; A[mid]:
+            high = mid - 1
+
+        else:
+            low = mid + 1
+
+    return NOT_FOUND
+</pre>
+
+
+                        <h3>
+                            Complexity
+                        </h3>
+
+                        <table>
+
+                            <tr>
+                                <th>Case</th>
+                                <th>Complexity</th>
+                            </tr>
+
+                            <tr>
+                                <td>Best</td>
+                                <td>Θ(1)</td>
+                            </tr>
+
+                            <tr>
+                                <td>Average</td>
+                                <td>Θ(log n)</td>
+                            </tr>
+
+                            <tr>
+                                <td>Worst</td>
+                                <td>Θ(log n)</td>
+                            </tr>
+
+                            <tr>
+                                <td>Recursive auxiliary space</td>
+                                <td>Θ(log n)</td>
+                            </tr>
+
+                            <tr>
+                                <td>Iterative auxiliary space</td>
+                                <td>Θ(1)</td>
+                            </tr>
+
+                        </table>
+
+
+                        <p>
+
+                            Recurrence:
+
+                            <code>
+T(n)=T(n/2)+Θ(1)
+</code>
+
+                            →
+
+                            <b>
+                                Θ(log n)
+                            </b>
+
+                        </p>
+
+
+                        <div class="warn">
+
+                            <b>Common trap:</b>
+
+                            Binary search is not valid on an unsorted ordinary array.
+
+                        </div>
+
+                    </div>
+
+                </details>
+
+
+
+                <!-- =========================================================
+     TOPIC 10
+========================================================= -->
+
+                <details class="card topic"
+                    data-title="merge sort algorithm divide conquer merge complexity recurrence">
+
+                    <summary>
+
+                        10. Merge Sort
+
+                        <span class="badge">
+                            Very high priority
+                        </span>
+
+                    </summary>
+
+
+                    <div class="card-body">
+
+                        <h3>
+                            Idea
+                        </h3>
+
+                        <p>
+
+                            Repeatedly split the array into halves until each part has one element,
+
+                            then merge the sorted parts.
+
+                        </p>
+
+
+                        <h3>
+                            Example
+                        </h3>
+
+                        <p>
+
+                            Sort:
+
+                            <code>
+[38,27,43,3,9,82,10]
+</code>
+
+                        </p>
+
+
+                        <pre>
+Split:
+
+[38,27,43,3]   [9,82,10]
+
+
+Continue:
+
+[38,27] [43,3]   [9,82] [10]
+
+
+Single elements:
+
+[38] [27] [43] [3] [9] [82] [10]
+
+
+Merge:
+
+[27,38] [3,43] [9,82] [10]
+
+
+Merge:
+
+[3,27,38,43] [9,10,82]
+
+
+Final:
+
+[3,9,10,27,38,43,82]
+</pre>
+
+
+                        <h3>
+                            Merge operation
+                        </h3>
+
+                        <p>
+
+                            Take the smallest front element from the two sorted subarrays
+
+                            and append it to the output.
+
+                            Continue until both are exhausted.
+
+                        </p>
+
+
+                        <h3>
+                            Recurrence
+                        </h3>
+
+                        <p class="math">
+
+                            <b>
+                                T(n)=2T(n/2)+Θ(n)
+                            </b>
+
+                        </p>
+
+                        <p>
+
+                            Two recursive calls
+
+                            +
+
+                            linear merge.
+
+                        </p>
+
+                        <p>
+
+                            Master Theorem:
+
+                            <b>
+                                Θ(n log n)
+                            </b>
+
+                        </p>
+
+
+                        <h3>
+                            Complexity
+                        </h3>
+
+                        <table>
+
+                            <tr>
+                                <th>Best</th>
+                                <td>
+                                    Θ(n log n)
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <th>Average</th>
+                                <td>
+                                    Θ(n log n)
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <th>Worst</th>
+                                <td>
+                                    Θ(n log n)
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <th>Auxiliary space</th>
+                                <td>
+                                    Θ(n)
+                                </td>
+                            </tr>
+
+                        </table>
+
+
+                        <h3>
+                            Properties
+                        </h3>
+
+                        <ul>
+
+                            <li>
+                                <b>Stable:</b>
+                                yes, with the standard merge implementation.
+                            </li>
+
+                            <li>
+                                <b>In-place:</b>
+                                standard array merge sort is not in-place.
+                            </li>
+
+                            <li>
+                                <b>Predictable:</b>
+                                Θ(n log n) in all standard cases.
+                            </li>
+
+                        </ul>
+
+
+                        <div class="exam">
+
+                            <b>Likely questions:</b>
+
+                            Write Merge Sort algorithm;
+
+                            trace it on an array;
+
+                            write recurrence;
+
+                            solve recurrence;
+
+                            state complexity;
+
+                            explain why merge takes Θ(n).
+
+                        </div>
+
+                    </div>
+
+                </details>
+
+
+
+                <!-- =========================================================
+     TOPIC 11
+========================================================= -->
+
+                <details class="card topic"
+                    data-title="quick sort partition lomuto hoare pivot best average worst complexity">
+
+                    <summary>
+
+                        11. Quick Sort
+
+                        <span class="badge">
+                            Extremely high priority
+                        </span>
+
+                    </summary>
+
+
+                    <div class="card-body">
+
+                        <h3>
+                            Core idea
+                        </h3>
+
+                        <p>
+
+                            Choose a pivot,
+
+                            partition the array so elements go to the appropriate side of the pivot,
+
+                            then recursively sort the two partitions.
+
+                        </p>
+
+
+                        <h3>
+                            General process
+                        </h3>
+
+                        <ol>
+
+                            <li>
+                                Choose pivot.
+                            </li>
+
+                            <li>
+                                Partition array around pivot.
+                            </li>
+
+                            <li>
+                                Recursively quick-sort the left side.
+                            </li>
+
+                            <li>
+                                Recursively quick-sort the right side.
+                            </li>
+
+                        </ol>
+
+
+                        <h3>
+                            Partition — one common exam convention
+                        </h3>
+
+                        <p>
+
+                            If the question specifies a partition method,
+
+                            follow it.
+
+                            If it does not,
+
+                            state the convention you are using.
+
+                            The exact intermediate array can differ between Lomuto and Hoare partition schemes while the
+                            final sorted array remains the same.
+
+                        </p>
+
+
+                        <h3>
+                            Example using last element as pivot (Lomuto-style)
+                        </h3>
+
+                        <p>
+
+                            Array:
+
+                            <code>
+[10,80,30,90,40,50,70]
+</code>
+
+                            pivot = 70.
+
+                        </p>
+
+                        <p>
+
+                            Elements ≤ 70 are moved left;
+
+                            elements &gt; 70 move right.
+
+                            One valid first partition gives:
+
+                        </p>
+
+
+                        <pre>
+[10,30,40,50,70,90,80]
+             ^
+           pivot
+</pre>
+
+
+                        <p>
+
+                            Now recursively sort:
+
+                            <code>
+[10,30,40,50]
+</code>
+
+                            and
+
+                            <code>
+[90,80]
+</code>.
+
+                        </p>
+
+
+                        <div class="warn">
+
+                            <b>Important for your paper:</b>
+
+                            Your previous mid-sem specifically asked for the partition steps on:
+
+                            <code>
+[10,80,30,90,40,50,70]
+</code>
+
+                            Practice this exact array,
+
+                            but also understand the method so a different array is not a problem.
+
+                        </div>
+
+
+                        <h3>
+                            Complexity
+                        </h3>
+
+                        <table>
+
+                            <tr>
+                                <th>Case</th>
+                                <th>Partition pattern</th>
+                                <th>Complexity</th>
+                            </tr>
+
+                            <tr>
+                                <td>Best</td>
+                                <td>Balanced halves</td>
+                                <td>Θ(n log n)</td>
+                            </tr>
+
+                            <tr>
+                                <td>Average</td>
+                                <td>Reasonably balanced on average</td>
+                                <td>Θ(n log n)</td>
+                            </tr>
+
+                            <tr>
+                                <td>Worst</td>
+                                <td>One side has n−1, other has 0</td>
+                                <td>Θ(n²)</td>
+                            </tr>
+
+                        </table>
+
+
+                        <h3>
+                            Why worst case is n²
+                        </h3>
+
+                        <p class="math">
+
+                            T(n)=T(n−1)+Θ(n)
+
+                        </p>
+
+                        <p>
+
+                            Expand:
+
+                        </p>
+
+                        <p class="math">
+
+                            n+(n−1)+(n−2)+...+1
+
+                            =
+
+                            Θ(n²)
+
+                        </p>
+
+
+                        <h3>
+                            Why best case is n log n
+                        </h3>
+
+                        <p class="math">
+
+                            T(n)=2T(n/2)+Θ(n)
+
+                        </p>
+
+                        <p>
+
+                            Master Theorem:
+
+                            <b>
+                                Θ(n log n)
+                            </b>
+
+                        </p>
+
+
+                        <h3>
+                            Space
+                        </h3>
+
+                        <p>
+
+                            Average recursion stack is typically
+
+                            O(log n)
+
+                            for balanced partitions;
+
+                            worst-case recursion depth can reach
+
+                            O(n).
+
+                        </p>
+
+
+                        <h3>
+                            How to avoid bad pivots
+                        </h3>
+
+                        <ul>
+
+                            <li>
+                                Randomized pivot selection.
+                            </li>
+
+                            <li>
+                                Median-of-three style heuristics.
+                            </li>
+
+                            <li>
+                                Other hybrid implementations.
+                            </li>
+
+                        </ul>
+
+
+                        <div class="exam">
+
+                            <b>6-mark answer structure:</b>
+
+                            Definition
+
+                            → choose pivot
+
+                            → show every partition step
+
+                            → recursive subarrays
+
+                            → final sorted array
+
+                            → best/worst complexity.
+
+                        </div>
+
+                    </div>
+
+                </details>
+
+
+
+                <!-- =========================================================
+     TOPIC 12
+========================================================= -->
+
+                <details class="card topic" data-title="merge vs quick sort comparison">
+
+                    <summary>
+
+                        12. Merge Sort vs Quick Sort
+
+                        <span class="badge">
+                            2–4 marks
+                        </span>
+
+                    </summary>
+
+
+                    <div class="card-body">
+
+                        <table>
+
+                            <tr>
+                                <th>Feature</th>
+                                <th>Merge Sort</th>
+                                <th>Quick Sort</th>
+                            </tr>
+
+                            <tr>
+                                <td>Paradigm</td>
+                                <td>Divide and conquer</td>
+                                <td>Divide and conquer</td>
+                            </tr>
+
+                            <tr>
+                                <td>Best</td>
+                                <td>Θ(n log n)</td>
+                                <td>Θ(n log n)</td>
+                            </tr>
+
+                            <tr>
+                                <td>Average</td>
+                                <td>Θ(n log n)</td>
+                                <td>Θ(n log n)</td>
+                            </tr>
+
+                            <tr>
+                                <td>Worst</td>
+                                <td>Θ(n log n)</td>
+                                <td>Θ(n²)</td>
+                            </tr>
+
+                            <tr>
+                                <td>Typical array auxiliary space</td>
+                                <td>Θ(n)</td>
+                                <td>O(log n) average stack</td>
+                            </tr>
+
+                            <tr>
+                                <td>Stable</td>
+                                <td>Yes, standard version</td>
+                                <td>Usually no</td>
+                            </tr>
+
+                            <tr>
+                                <td>Main operation</td>
+                                <td>Merge sorted halves</td>
+                                <td>Partition around pivot</td>
+                            </tr>
+
+                        </table>
+
+
+                        <div class="exam">
+
+                            <b>Exam phrasing:</b>
+
+                            “Both use divide and conquer,
+
+                            but Merge Sort guarantees Θ(n log n) worst-case time while standard Quick Sort can degrade
+                            to Θ(n²).
+
+                            Merge Sort normally uses extra array space;
+
+                            Quick Sort can be implemented with small auxiliary stack space.”
+
+                        </div>
+
+                    </div>
+
+                </details>
+
+
+
+                <!-- =========================================================
+     TOPIC 13
+========================================================= -->
+
+                <details class="card topic" data-title="divide conquer analysis recurrence">
+
+                    <summary>
+
+                        13. How to Analyze Divide-and-Conquer Algorithms
+
+                        <span class="badge">
+                            Theory
+                        </span>
+
+                    </summary>
+
+
+                    <div class="card-body">
+
+                        <h3>
+                            The standard checklist
+                        </h3>
+
+                        <ol>
+
+                            <li>
+                                Identify the number of recursive calls
+                                <b>a</b>.
+                            </li>
+
+                            <li>
+                                Identify the size of each subproblem
+                                <b>n/b</b>.
+                            </li>
+
+                            <li>
+                                Calculate non-recursive work
+                                <b>f(n)</b>.
+                            </li>
+
+                            <li>
+                                Write:
+
+                                <code>
+T(n)=aT(n/b)+f(n)
+</code>
+                            </li>
+
+                            <li>
+                                Solve using Master Theorem,
+
+                                recursion tree,
+
+                                iteration,
+
+                                or substitution as appropriate.
+
+                            </li>
+
+                        </ol>
+
+
+                        <h3>
+                            Examples
+                        </h3>
+
+                        <table>
+
+                            <tr>
+                                <th>Algorithm</th>
+                                <th>Recurrence</th>
+                                <th>Result</th>
+                            </tr>
+
+                            <tr>
+                                <td>Binary Search</td>
+                                <td>
+                                    T(n)=T(n/2)+1
+                                </td>
+                                <td>
+                                    Θ(log n)
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>Merge Sort</td>
+                                <td>
+                                    T(n)=2T(n/2)+n
+                                </td>
+                                <td>
+                                    Θ(n log n)
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>Quick Sort best</td>
+                                <td>
+                                    T(n)=2T(n/2)+n
+                                </td>
+                                <td>
+                                    Θ(n log n)
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>Quick Sort worst</td>
+                                <td>
+                                    T(n)=T(n−1)+n
+                                </td>
+                                <td>
+                                    Θ(n²)
+                                </td>
+                            </tr>
+
+                        </table>
+
+                    </div>
+
+                </details>
+
+
+
+                <!-- =========================================================
+     TOPIC 14
+========================================================= -->
+
+                <details class="card topic" data-title="common mistakes asymptotic recurrence quicksort merge">
+
+                    <summary>
+
+                        14. Common Mistakes That Lose Marks
+
+                        <span class="badge">
+                            Read before exam
+                        </span>
+
+                    </summary>
+
+
+                    <div class="card-body">
+
+                        <ul>
+
+                            <li>
+                                Writing <b>O(n²)</b> when the question asks for a tight bound and the correct answer is
+                                Θ(n²).
+                            </li>
+
+                            <li>
+                                Forgetting the base case when solving a recurrence.
+                            </li>
+
+                            <li>
+                                Using Master Theorem on a recurrence that does not fit its form.
+                            </li>
+
+                            <li>
+                                For Merge Sort, forgetting the Θ(n) merge cost.
+                            </li>
+
+                            <li>
+                                For Quick Sort, claiming worst case is always n².
+                                It is the worst-case bound, not every input.
+                            </li>
+
+                            <li>
+                                For Binary Search, forgetting that the data must be sorted.
+                            </li>
+
+                            <li>
+                                For Disjoint Sets, confusing <b>Find</b> with <b>Union</b>.
+                            </li>
+
+                            <li>
+                                In Quick Sort, changing the pivot/partition convention halfway through the trace.
+                            </li>
+
+                            <li>
+                                Giving only the final sorted array when the question explicitly asks for partition
+                                steps.
+                            </li>
+
+                            <li>
+                                Writing only a complexity value for a 6-mark question without explaining the algorithm.
+                            </li>
+
+                        </ul>
+
+                    </div>
+
+                </details>
+
+
+
+                <!-- =========================================================
+     TOPIC 15
+========================================================= -->
+
+                <details class="card topic" data-title="selection sort algorithm complexity best average worst">
+
+                    <summary>
+
+                        15. Selection Sort
+
+                        <span class="badge">
+                            2–4 marks
+                        </span>
+
+                    </summary>
+
+
+                    <div class="card-body">
+
+                        <h3>
+                            Core idea
+                        </h3>
+
+                        <p>
+
+                            Repeatedly find the minimum element from the unsorted part and put it at the beginning.
+
+                        </p>
+
+
+                        <h3>
+                            Algorithm
+                        </h3>
+
+                        <pre>
+SelectionSort(A, n):
+    for i = 0 to n-2:
+        min_idx = i
+        for j = i+1 to n-1:
+            if A[j] &lt; A[min_idx]:
+                min_idx = j
+        swap(A[i], A[min_idx])
+</pre>
+
+
+                        <h3>
+                            Example
+                        </h3>
+
+                        <p>
+
+                            Array:
+                            <code>
+[64, 25, 12, 22, 11]
+</code>
+
+                        </p>
+
+                        <ul>
+
+                            <li>
+                                Pass 1: min is 11, swap with 64 →
+                                <code>[11, 25, 12, 22, 64]</code>
+                            </li>
+
+                            <li>
+                                Pass 2: min is 12, swap with 25 →
+                                <code>[11, 12, 25, 22, 64]</code>
+                            </li>
+
+                            <li>
+                                Pass 3: min is 22, swap with 25 →
+                                <code>[11, 12, 22, 25, 64]</code>
+                            </li>
+
+                            <li>
+                                Pass 4: min is 25, swap with 25 (no change) →
+                                <code>[11, 12, 22, 25, 64]</code>
+                            </li>
+
+                        </ul>
+
+
+                        <h3>
+                            Complexity
+                        </h3>
+
+                        <table>
+
+                            <tr>
+                                <th>Case</th>
+                                <th>Reason</th>
+                                <th>Complexity</th>
+                            </tr>
+
+                            <tr>
+                                <td>Best</td>
+                                <td>Inner loop always runs regardless of sortedness</td>
+                                <td>Θ(n²)</td>
+                            </tr>
+
+                            <tr>
+                                <td>Average</td>
+                                <td>Inner loop always runs</td>
+                                <td>Θ(n²)</td>
+                            </tr>
+
+                            <tr>
+                                <td>Worst</td>
+                                <td>Inner loop always runs</td>
+                                <td>Θ(n²)</td>
+                            </tr>
+
+                        </table>
+
+                        <p>
+
+                            Auxiliary space is Θ(1) (In-place sorting). Standard selection sort is NOT stable.
+
+                        </p>
+
+                    </div>
+
+                </details>
+
+
+
+                <!-- =========================================================
+     TOPIC 16
+========================================================= -->
+
+                <details class="card topic" data-title="strassen matrix multiplication divide conquer">
+
+                    <summary>
+
+                        16. Strassen's Matrix Multiplication
+
+                        <span class="badge">
+                            High priority
+                        </span>
+
+                    </summary>
+
+
+                    <div class="card-body">
+
+                        <h3>
+                            Standard Matrix Multiplication
+                        </h3>
+
+                        <p>
+
+                            Multiplying two n×n matrices takes
+                            <b>Θ(n³)</b>
+                            time using the standard 3-nested-loop algorithm.
+
+                        </p>
+
+
+                        <h3>
+                            Simple Divide &amp; Conquer
+                        </h3>
+
+                        <p>
+
+                            Divide matrices into 4 submatrices of size n/2 × n/2.
+                            <br>
+                            Recurrence:
+                            <code>T(n) = 8T(n/2) + Θ(n²)</code>
+                            <br>
+                            Master Theorem: Θ(n³), no improvement.
+
+                        </p>
+
+
+                        <h3>
+                            Strassen's Method
+                        </h3>
+
+                        <p>
+
+                            Strassen reduced the 8 recursive multiplications to
+                            <b>7</b>
+                            by using clever algebraic manipulations.
+
+                        </p>
+
+                        <p>
+
+                            The recurrence becomes:
+
+                        </p>
+
+                        <p class="math">
+
+                            <b>T(n) = 7T(n/2) + Θ(n²)</b>
+
+                        </p>
+
+
+                        <h3>
+                            Complexity Analysis
+                        </h3>
+
+                        <ul>
+
+                            <li>a = 7</li>
+
+                            <li>b = 2</li>
+
+                            <li>f(n) = Θ(n²)</li>
+
+                            <li>n^(log₂7) ≈ n^(2.81)</li>
+
+                        </ul>
+
+                        <p>
+
+                            Since f(n) = O(n^(log₂7 - ε)), by Master Theorem Case 1, the complexity is:
+
+                        </p>
+
+                        <p class="math">
+
+                            <b>Θ(n^(log₂7)) ≈ Θ(n^(2.81))</b>
+
+                        </p>
+
+
+                        <div class="exam">
+
+                            <b>Exam note:</b>
+
+                            Be prepared to write down the recurrence relation
+                            <code>T(n) = 7T(n/2) + O(n²)</code>
+                            and solve it using the Master Theorem. Knowing all 7 equations is usually not required unless strictly taught in class, but knowing the <i>count</i> of multiplications (7) vs additions (18) is key.
+
+                        </div>
+
+                    </div>
+
+                </details>
+
+
+
+                <!-- =========================================================
+     TOPIC 17
+========================================================= -->
+
+                <details class="card topic" data-title="brief review of graphs directed undirected adjacency list matrix">
+
+                    <summary>
+
+                        17. Brief Review of Graphs
+
+                        <span class="badge">
+                            2–4 marks
+                        </span>
+
+                    </summary>
+
+
+                    <div class="card-body">
+
+                        <h3>
+                            Definitions
+                        </h3>
+
+                        <p>
+
+                            A graph
+                            <b>G = (V, E)</b>
+                            consists of a set of vertices (V) and a set of edges (E).
+
+                        </p>
+
+                        <ul>
+
+                            <li><b>Directed Graph:</b> Edges have a direction (e.g., u → v).</li>
+
+                            <li><b>Undirected Graph:</b> Edges have no direction (u — v).</li>
+
+                            <li><b>Weighted Graph:</b> Edges have associated weights/costs.</li>
+
+                        </ul>
+
+
+                        <h3>
+                            Graph Representations
+                        </h3>
+
+                        <table>
+
+                            <tr>
+                                <th>Representation</th>
+                                <th>Space</th>
+                                <th>Pros</th>
+                                <th>Cons</th>
+                            </tr>
+
+                            <tr>
+                                <td><b>Adjacency Matrix</b></td>
+                                <td>Θ(V²)</td>
+                                <td>Fast edge lookup O(1)</td>
+                                <td>Wastes space for sparse graphs</td>
+                            </tr>
+
+                            <tr>
+                                <td><b>Adjacency List</b></td>
+                                <td>Θ(V + E)</td>
+                                <td>Saves space, fast iteration over neighbors</td>
+                                <td>Slow edge lookup O(degree)</td>
+                            </tr>
+
+                        </table>
+
+                    </div>
+
+                </details>
+
+
+
+                <!-- =========================================================
+     TOPIC 18
+========================================================= -->
+
+                <details class="card topic" data-title="summary best worst average time space complexity sorting searching">
+
+                    <summary>
+
+                        18. Summary of All Complexities (Best, Average, Worst)
+
+                        <span class="badge">
+                            Quick Review
+                        </span>
+
+                    </summary>
+
+
+                    <div class="card-body">
+
+                        <p>
+
+                            A quick-reference table for the best, average, and worst-case time complexities and space complexities.
+
+                        </p>
+
+                        <table>
+
+                            <tr>
+                                <th>Algorithm</th>
+                                <th>Best Case</th>
+                                <th>Average Case</th>
+                                <th>Worst Case</th>
+                                <th>Space Complexity</th>
+                            </tr>
+
+                            <tr>
+                                <td>Linear Search</td>
+                                <td>Θ(1)</td>
+                                <td>Θ(n)</td>
+                                <td>Θ(n)</td>
+                                <td>Θ(1)</td>
+                            </tr>
+
+                            <tr>
+                                <td>Binary Search</td>
+                                <td>Θ(1)</td>
+                                <td>Θ(log n)</td>
+                                <td>Θ(log n)</td>
+                                <td>Θ(1) iter / Θ(log n) rec</td>
+                            </tr>
+
+                            <tr>
+                                <td>Selection Sort</td>
+                                <td>Θ(n²)</td>
+                                <td>Θ(n²)</td>
+                                <td>Θ(n²)</td>
+                                <td>Θ(1)</td>
+                            </tr>
+
+                            <tr>
+                                <td>Merge Sort</td>
+                                <td>Θ(n log n)</td>
+                                <td>Θ(n log n)</td>
+                                <td>Θ(n log n)</td>
+                                <td>Θ(n)</td>
+                            </tr>
+
+                            <tr>
+                                <td>Quick Sort</td>
+                                <td>Θ(n log n)</td>
+                                <td>Θ(n log n)</td>
+                                <td>Θ(n²)</td>
+                                <td>Θ(log n)</td>
+                            </tr>
+
+                            <tr>
+                                <td>Strassen's Matrix Mult.</td>
+                                <td>Θ(n^(2.81))</td>
+                                <td>Θ(n^(2.81))</td>
+                                <td>Θ(n^(2.81))</td>
+                                <td>Θ(n²)</td>
+                            </tr>
+
+                        </table>
+
+                    </div>
+
+                </details>
+
+
+                <!-- =========================================================
+     TOPIC 19
+========================================================= -->
+
+                <details class="card topic" data-title="properties of asymptotic notations reflexivity symmetry transitivity">
+
+                    <summary>
+
+                        19. Properties of Asymptotic Notations
+
+                        <span class="badge">
+                            High Priority (IPU Exam)
+                        </span>
+
+                    </summary>
+
+                    <div class="card-body">
+
+                        <h3>
+                            1. Transitivity
+                        </h3>
+                        <p>If <code>f(n) = O(g(n))</code> and <code>g(n) = O(h(n))</code>, then <code>f(n) = O(h(n))</code>.</p>
+                        <p><i>Applies to:</i> O, Ω, Θ, o, ω.</p>
+
+                        <h3>
+                            2. Reflexivity
+                        </h3>
+                        <p>A function is always bounded by itself: <code>f(n) = O(f(n))</code>.</p>
+                        <p><i>Applies to:</i> O, Ω, Θ (but <b>not</b> to strictly less/greater o, ω).</p>
+
+                        <h3>
+                            3. Symmetry
+                        </h3>
+                        <p>If <code>f(n) = Θ(g(n))</code>, then <code>g(n) = Θ(f(n))</code>.</p>
+                        <p><i>Applies to:</i> Θ only.</p>
+
+                        <h3>
+                            4. Transpose Symmetry
+                        </h3>
+                        <p>If <code>f(n) = O(g(n))</code>, then <code>g(n) = Ω(f(n))</code>.</p>
+                        <p>If <code>f(n) = o(g(n))</code>, then <code>g(n) = ω(f(n))</code>.</p>
+
+                        <div class="exam">
+                            <b>Likely Question:</b> "Explain properties of asymptotic notations with examples." (Usually 4–6 marks). State the property and write one basic algebraic example (e.g. n is O(n²), n² is O(n³), so n is O(n³)).
+                        </div>
+
+                    </div>
+                </details>
+
+                <!-- =========================================================
+     TOPIC 20
+========================================================= -->
+
+                <details class="card topic" data-title="master theorem subtract and conquer recurrence">
+
+                    <summary>
+
+                        20. Master Theorem (Subtract and Conquer)
+
+                        <span class="badge">
+                            IPU Specific
+                        </span>
+
+                    </summary>
+
+                    <div class="card-body">
+
+                        <h3>
+                            Form
+                        </h3>
+                        <p>For recurrences of the form: <b>T(n) = a T(n - b) + f(n)</b></p>
+                        <p>Where <code>a &gt; 0</code>, <code>b &gt; 0</code>, and <code>f(n) = O(n^k)</code> where <code>k &gt;= 0</code>.</p>
+
+                        <h3>
+                            The 3 Cases
+                        </h3>
+
+                        <ul>
+                            <li><b>Case 1:</b> If <code>a &lt; 1</code>, then <b>T(n) = O(n^k)</b></li>
+                            <li><b>Case 2:</b> If <code>a = 1</code>, then <b>T(n) = O(n^(k+1))</b></li>
+                            <li><b>Case 3:</b> If <code>a &gt; 1</code>, then <b>T(n) = O(a^(n/b) * n^k)</b></li>
+                        </ul>
+
+                        <h3>
+                            Example
+                        </h3>
+                        <p><b>T(n) = 2T(n - 1) + 1</b></p>
+                        <ul>
+                            <li>a = 2, b = 1, f(n) = 1 (so k = 0)</li>
+                            <li>Since a &gt; 1 (Case 3), the complexity is <b>O(2^n)</b></li>
+                        </ul>
+                        <p><i>Note: This is exactly the recurrence for the worst-case of recursive Tower of Hanoi!</i></p>
+
+                    </div>
+                </details>
+
+
+                <!-- =========================================================
+     TOPIC 21
+========================================================= -->
+
+                <details class="card topic" data-title="finding maximum and minimum maxmin divide conquer">
+
+                    <summary>
+
+                        21. Finding Maximum and Minimum (MaxMin)
+
+                        <span class="badge">
+                            Common IPU Concept
+                        </span>
+
+                    </summary>
+
+                    <div class="card-body">
+
+                        <h3>
+                            Problem
+                        </h3>
+                        <p>Find the maximum and minimum elements in an array of size n.</p>
+
+                        <h3>
+                            Standard Approach
+                        </h3>
+                        <p>Linearly scan the array. Requires <b>2n - 2</b> or <b>2n - 3</b> comparisons.</p>
+
+                        <h3>
+                            Divide and Conquer Approach
+                        </h3>
+                        <p>Divide the array into two halves. Recursively find (max, min) for both halves, then combine by comparing the two maximums and the two minimums.</p>
+
+                        <pre>
+MaxMin(A, low, high):
+    if low == high: // 1 element
+        return (A[low], A[low])
+    if high == low + 1: // 2 elements
+        if A[low] &lt; A[high]: return (A[high], A[low])
+        else: return (A[low], A[high])
+
+    mid = floor((low + high) / 2)
+    (max1, min1) = MaxMin(A, low, mid)
+    (max2, min2) = MaxMin(A, mid + 1, high)
+
+    return (max(max1, max2), min(min1, min2))
+</pre>
+
+                        <h3>
+                            Recurrence and Complexity
+                        </h3>
+                        <p>Recurrence for the number of comparisons: <code>T(n) = 2T(n/2) + 2</code></p>
+                        <p>Solving this using the recursion tree or substitution gives exactly <b>3n/2 - 2</b> comparisons.</p>
+                        <p><i>Why is it better?</i> While asymptotic time complexity is still <b>Θ(n)</b>, the constant factor (number of comparisons) is reduced from ~2n to ~1.5n, making it faster in practice.</p>
+
+                    </div>
+                </details>
+
+
+                <!-- =========================================================
+     TOPIC 22
+========================================================= -->
+
+                <details class="card topic" data-title="algorithm definition characteristics properties input output definiteness finiteness effectiveness">
+
+                    <summary>
+
+                        22. Algorithm Definition & Characteristics
+
+                        <span class="badge">
+                            High Priority Theory (IPU)
+                        </span>
+
+                    </summary>
+
+                    <div class="card-body">
+
+                        <h3>
+                            Definition
+                        </h3>
+                        <p>An algorithm is a finite set of unambiguous instructions that, if followed, accomplishes a particular task and produces an output.</p>
+
+                        <h3>
+                            Essential Characteristics of a Good Algorithm
+                        </h3>
+                        <ul>
+                            <li><b>Input:</b> An algorithm has zero or more externally supplied inputs.</li>
+                            <li><b>Output:</b> An algorithm produces at least one output.</li>
+                            <li><b>Definiteness:</b> Each instruction must be clear and unambiguous (e.g., no division by zero or confusing statements).</li>
+                            <li><b>Finiteness:</b> The algorithm must terminate after a finite number of steps for all possible cases.</li>
+                            <li><b>Effectiveness:</b> Every instruction must be very basic and feasible enough to be carried out in principle by a person using paper and pencil.</li>
+                        </ul>
+
+                        <div class="exam">
+                            <b>Likely Question:</b> "Define an algorithm. What are the essential characteristics of a good algorithm?" (Common 4-mark short question).
+                        </div>
+
+                    </div>
+                </details>
+
+
+                <!-- =========================================================
+     TOPIC 23
+========================================================= -->
+
+                <details class="card topic" data-title="a priori a posteriori analysis difference theoretical practical">
+
+                    <summary>
+
+                        23. A Priori vs A Posteriori Analysis
+
+                        <span class="badge">
+                            Common Comparison (IPU)
+                        </span>
+
+                    </summary>
+
+                    <div class="card-body">
+
+                        <h3>
+                            Overview
+                        </h3>
+                        <p>When analyzing algorithms, we can measure performance theoretically (before running) or practically (after running).</p>
+
+                        <table>
+                            <tr>
+                                <th>Feature</th>
+                                <th>A Priori Analysis</th>
+                                <th>A Posteriori Analysis</th>
+                            </tr>
+                            <tr>
+                                <td><b>Definition</b></td>
+                                <td>Theoretical analysis of an algorithm.</td>
+                                <td>Practical/empirical analysis of an algorithm.</td>
+                            </tr>
+                            <tr>
+                                <td><b>When it is done</b></td>
+                                <td><i>Before</i> implementation.</td>
+                                <td><i>After</i> implementation and execution.</td>
+                            </tr>
+                            <tr>
+                                <td><b>What it measures</b></td>
+                                <td>Time and space complexity using asymptotic notations (O, Θ, Ω).</td>
+                                <td>Actual time taken (in seconds/milliseconds) and bytes of memory consumed.</td>
+                            </tr>
+                            <tr>
+                                <td><b>Hardware/Software Dependency</b></td>
+                                <td>Independent of hardware, compiler, or programming language.</td>
+                                <td>Highly dependent on processor speed, compiler optimization, and system load.</td>
+                            </tr>
+                            <tr>
+                                <td><b>Result form</b></td>
+                                <td>Mathematical function (e.g., f(n) = n²).</td>
+                                <td>Exact statistical values (e.g., 2.3 seconds).</td>
+                            </tr>
+                        </table>
+
+                    </div>
+                </details>
+
+                <!-- =========================================================
+     TOPIC 24
+========================================================= -->
+
+                <details class="card topic" data-title="time space complexity auxiliary space differences">
+
+                    <summary>
+
+                        24. Time vs Space Complexity & Auxiliary Space
+
+                        <span class="badge">
+                            Core Theory (IPU)
+                        </span>
+
+                    </summary>
+
+                    <div class="card-body">
+
+                        <h3>
+                            Time Complexity
+                        </h3>
+                        <p>The total amount of time required by an algorithm to complete its execution as a function of the length of the input (<code>n</code>). It is not measured in seconds, but in the number of basic operations (comparisons, assignments, arithmetic operations) executed.</p>
+
+                        <h3>
+                            Space Complexity
+                        </h3>
+                        <p>The total amount of memory space required by the algorithm during its execution. It is the sum of two components:</p>
+                        <ul>
+                            <li><b>Fixed Part:</b> Space needed for instructions, simple variables, fixed-size component variables, and constants.</li>
+                            <li><b>Variable Part (Auxiliary Space):</b> Extra space required dynamically based on the input size <code>n</code>, such as recursion stack space or dynamically allocated arrays.</li>
+                        </ul>
+
+                        <div class="warn">
+                            <b>Space Complexity vs Auxiliary Space:</b><br>
+                            <i>Auxiliary space</i> is the extra or temporary space used by the algorithm (excluding input data space). <i>Space complexity</i> includes both the auxiliary space AND the space used by the input.<br><br>
+                            For example, if an algorithm sorts an array of size <code>n</code> in-place, its <b>Auxiliary Space is O(1)</b>, but its total <b>Space Complexity is O(n)</b> because of the input array itself. When analyzing algorithms, we generally care most about the <i>Auxiliary Space</i>.
+                        </div>
+
+                    </div>
+                </details>
+
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =========================================================
+     RECURRENCE CHEAT SHEET
+========================================================= -->
+
+        <section id="recurrences" class="section">
+
+            <h2>
+                Recurrence Cheat Sheet
+            </h2>
+
+
+            <table>
+
+                <tr>
+                    <th>Recurrence</th>
+                    <th>Algorithm / Pattern</th>
+                    <th>Answer</th>
+                </tr>
+
+                <tr>
+                    <td>
+                        T(n)=T(n/2)+1
+                    </td>
+
+                    <td>
+                        Binary Search
+                    </td>
+
+                    <td>
+                        Θ(log n)
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        T(n)=2T(n/2)+n
+                    </td>
+
+                    <td>
+                        Merge Sort / balanced Quick Sort
+                    </td>
+
+                    <td>
+                        Θ(n log n)
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        T(n)=T(n−1)+n
+                    </td>
+
+                    <td>
+                        Worst Quick Sort
+                    </td>
+
+                    <td>
+                        Θ(n²)
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        T(n)=4T(n/2)+n
+                    </td>
+
+                    <td>
+                        Master Case 1
+                    </td>
+
+                    <td>
+                        Θ(n²)
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        T(n)=T(n/2)+n
+                    </td>
+
+                    <td>
+                        Master Case 3
+                    </td>
+
+                    <td>
+                        Θ(n)
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        T(n)=3T(n/2)+n
+                    </td>
+
+                    <td>
+                        Compare n with n^(log₂3)
+                    </td>
+
+                    <td>
+                        Θ(n^(log₂3))
+                    </td>
+                </tr>
+
+            </table>
+
+
+            <div class="callout">
+
+                <b>Master Theorem memory trick:</b>
+
+                Calculate:
+
+                <code>
+p = log_b(a)
+</code>
+
+                Then compare:
+
+                <code>
+f(n)
+</code>
+
+                with:
+
+                <code>
+n^p
+</code>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =========================================================
+     COMPLEXITY SHEET
+========================================================= -->
+
+        <section class="section">
+
+            <h2>
+                Unit I Complexity Sheet
+            </h2>
+
+
+            <table>
+
+                <tr>
+                    <th>
+                        Algorithm / Operation
+                    </th>
+
+                    <th>
+                        Best
+                    </th>
+
+                    <th>
+                        Average
+                    </th>
+
+                    <th>
+                        Worst
+                    </th>
+
+                </tr>
+
+
+                <tr>
+
+                    <td>
+                        Binary Search
+                    </td>
+
+                    <td>
+                        Θ(1)
+                    </td>
+
+                    <td>
+                        Θ(log n)
+                    </td>
+
+                    <td>
+                        Θ(log n)
+                    </td>
+
+                </tr>
+
+
+                <tr>
+
+                    <td>
+                        Merge Sort
+                    </td>
+
+                    <td>
+                        Θ(n log n)
+                    </td>
+
+                    <td>
+                        Θ(n log n)
+                    </td>
+
+                    <td>
+                        Θ(n log n)
+                    </td>
+
+                </tr>
+
+
+                <tr>
+
+                    <td>
+                        Quick Sort
+                    </td>
+
+                    <td>
+                        Θ(n log n)
+                    </td>
+
+                    <td>
+                        Θ(n log n)
+                    </td>
+
+                    <td>
+                        Θ(n²)
+                    </td>
+
+                </tr>
+
+
+                <tr>
+
+                    <td>
+                        Union-Find with path compression + union by rank/size
+                    </td>
+
+                    <td colspan="3">
+                        Amortized O(α(n)) per operation
+                    </td>
+
+                </tr>
+
+            </table>
+
+        </section>
+
+
+
+        <!-- =========================================================
+     EXAM MODE
+========================================================= -->
+
+        <section id="exam" class="section">
+
+            <h2>
+                Exam Mode — What to Write
+            </h2>
+
+
+            <div class="grid">
+
+
+                <details class="card">
+
+                    <summary>
+                        2-mark: Big-O + Big-Ω
+                    </summary>
+
+                    <div class="card-body">
+
+                        <p>
+
+                            <b>Big-O:</b>
+
+                            f(n)=O(g(n))
+
+                            if there exist c&gt;0 and n₀ such that
+
+                            0≤f(n)≤cg(n)
+
+                            for all n≥n₀.
+
+                            Example:
+
+                            3n+2=O(n).
+
+                        </p>
+
+                        <p>
+
+                            <b>Big-Ω:</b>
+
+                            f(n)=Ω(g(n))
+
+                            if there exist c&gt;0 and n₀ such that
+
+                            0≤cg(n)≤f(n)
+
+                            for all n≥n₀.
+
+                            Example:
+
+                            3n+2=Ω(n).
+
+                        </p>
+
+                    </div>
+
+                </details>
+
+
+
+                <details class="card">
+
+                    <summary>
+                        2-mark: Merge Sort recurrence
+                    </summary>
+
+                    <div class="card-body">
+
+                        <p>
+
+                            Merge Sort divides into two subarrays of n/2
+
+                            and spends Θ(n) merging:
+
+                        </p>
+
+                        <p class="math">
+
+                            <b>
+                                T(n)=2T(n/2)+Θ(n)
+                            </b>
+
+                        </p>
+
+                    </div>
+
+                </details>
+
+
+
+                <details class="card">
+
+                    <summary>
+                        2-mark: Disjoint Sets
+                    </summary>
+
+                    <div class="card-body">
+
+                        <p>
+
+                            State
+
+                            <b>
+                                Find
+                            </b>
+
+                            and
+
+                            <b>
+                                Union
+                            </b>
+
+                            (or Make-Set),
+
+                            then state their roles.
+
+                            Find returns the representative;
+
+                            Union merges two sets.
+
+                        </p>
+
+                    </div>
+
+                </details>
+
+
+
+                <details class="card">
+
+                    <summary>
+                        4-mark: Master Theorem
+                    </summary>
+
+                    <div class="card-body">
+
+                        <p>
+
+                            Always show:
+
+                            <b>
+                                a, b, f(n), n^(log_b a), case, final Θ
+                            </b>.
+
+                        </p>
+
+                    </div>
+
+                </details>
+
+
+
+                <details class="card">
+
+                    <summary>
+                        6-mark: Quick Sort
+                    </summary>
+
+                    <div class="card-body">
+
+                        <p>
+
+                            Definition
+
+                            → pivot
+
+                            → partition every step
+
+                            → recursive calls
+
+                            → sorted result
+
+                            → best/worst complexity.
+
+                        </p>
+
+                    </div>
+
+                </details>
+
+
+
+                <details class="card">
+
+                    <summary>
+                        6-mark: Merge Sort
+                    </summary>
+
+                    <div class="card-body">
+
+                        <p>
+
+                            Definition
+
+                            → splitting diagram
+
+                            → merging steps
+
+                            → recurrence
+
+                            → complexity
+
+                            → space/stability if asked.
+
+                        </p>
+
+                    </div>
+
+                </details>
+
+
+            </div>
+
+
+            <div class="exam">
+
+                <b>Based on your previous mid-sem paper:</b>
+
+                <ul>
+
+                    <li>
+                        Q1(a): Big-O / Big-Ω
+                    </li>
+
+                    <li>
+                        Q1(b): Merge Sort recurrence
+                    </li>
+
+                    <li>
+                        Q1(c): Disjoint Sets
+                    </li>
+
+                    <li>
+                        Q2(a): Quick Sort trace + best/worst complexity
+                    </li>
+
+                    <li>
+                        Q2(b): Master Theorem
+                    </li>
+
+                </ul>
+
+                <p>
+
+                    So these five areas deserve the highest practice priority.
+
+                </p>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =========================================================
+     CHECKLIST
+========================================================= -->
+
+        <section id="checklist" class="section checklist">
+
+            <h2>
+                Final Unit I Checklist
+            </h2>
+
+            <p>
+
+                Tick a box only if you can answer it
+
+                <b>
+                    without opening the notes.
+                </b>
+
+            </p>
+
+
+            <label>
+                <input type="checkbox" data-check>
+                I can define time and space complexity.
+            </label>
+
+            <label>
+                <input type="checkbox" data-check>
+                I can distinguish best, average and worst case.
+            </label>
+
+            <label>
+                <input type="checkbox" data-check>
+                I can define Big-O formally.
+            </label>
+
+            <label>
+                <input type="checkbox" data-check>
+                I can define Big-Ω formally.
+            </label>
+
+            <label>
+                <input type="checkbox" data-check>
+                I can define Θ and explain why it is a tight bound.
+            </label>
+
+            <label>
+                <input type="checkbox" data-check>
+                I understand little-o and little-omega.
+            </label>
+
+            <label>
+                <input type="checkbox" data-check>
+                I can simplify polynomial growth functions.
+            </label>
+
+            <label>
+                <input type="checkbox" data-check>
+                I can write a recurrence from a recursive algorithm.
+            </label>
+
+            <label>
+                <input type="checkbox" data-check>
+                I can solve T(n)=T(n/2)+1.
+            </label>
+
+            <label>
+                <input type="checkbox" data-check>
+                I can solve T(n)=2T(n/2)+n.
+            </label>
+
+            <label>
+                <input type="checkbox" data-check>
+                I can use the Master Theorem cases.
+            </label>
+
+            <label>
+                <input type="checkbox" data-check>
+                I understand Make-Set, Find and Union.
+            </label>
+
+            <label>
+                <input type="checkbox" data-check>
+                I understand path compression and union by rank/size.
+            </label>
+
+            <label>
+                <input type="checkbox" data-check>
+                I can explain Divide and Conquer.
+            </label>
+
+            <label>
+                <input type="checkbox" data-check>
+                I can perform Binary Search by hand.
+            </label>
+
+            <label>
+                <input type="checkbox" data-check>
+                I can perform Merge Sort by hand.
+            </label>
+
+            <label>
+                <input type="checkbox" data-check>
+                I can write the Merge Sort recurrence.
+            </label>
+
+            <label>
+                <input type="checkbox" data-check>
+                I can perform Quick Sort partitioning by hand.
+            </label>
+
+            <label>
+                <input type="checkbox" data-check>
+                I know Quick Sort best/average/worst cases.
+            </label>
+
+            <label>
+                <input type="checkbox" data-check>
+                I can compare Merge Sort and Quick Sort.
+            </label>
+
+            <label>
+                <input type="checkbox" data-check>
+                I can write a complete 6-mark algorithm answer.
+            </label>
+
+        </section>
+
+
+
+        <!-- =========================================================
+     30 MIN REVISION
+========================================================= -->
+
+        <section class="section">
+
+            <h2>
+                Final 30-minute revision
+            </h2>
+
+
+            <ol>
+
+                <li>
+                    <b>5 min:</b>
+                    O / Ω / Θ definitions + growth order.
+                </li>
+
+                <li>
+                    <b>7 min:</b>
+                    Master Theorem cases + solve 2 recurrences.
+                </li>
+
+                <li>
+                    <b>3 min:</b>
+                    Disjoint Set operations.
+                </li>
+
+                <li>
+                    <b>5 min:</b>
+                    Merge Sort trace + recurrence + complexity.
+                </li>
+
+                <li>
+                    <b>7 min:</b>
+                    Quick Sort partition on the previous-paper array.
+                </li>
+
+                <li>
+                    <b>3 min:</b>
+                    Binary Search + complexity sheet.
+                </li>
+
+            </ol>
+
+
+            <div class="tip">
+
+                <b>Target:</b>
+
+                For an 8/10 Unit I target,
+
+                do not spend your final revision time rereading definitions.
+
+                Spend it solving:
+
+                <b>
+                    one recurrence,
+
+                    one Master Theorem question,
+
+                    one Merge Sort trace,
+
+                    and one Quick Sort partition
+                </b>
+
+                from memory.
+
+            </div>
+
+        </section>
+
+
+    </main>
+
+
+
+    <!-- =========================================================
+     FOOTER
+========================================================= -->
+
+    <footer>
+
+        <div class="container">
+
+            <b>
+                DAA Unit I — Exam Prep
+            </b>
+
+            <p>
+
+                Designed around the topics represented in your previous mid-sem paper,
+
+                with additional theory and practice so the unit is not dependent on one exact question pattern.
+
+            </p>
+
+        </div>
+
+    </footer>
+
+
+
+    <!-- =========================================================
+     JAVASCRIPT
+========================================================= -->
+
+    <script>
+
+        /* ==========================================
+           GET ELEMENTS
+        ========================================== */
+
+        const cards = [
+            ...document.querySelectorAll('.topic')
+        ];
+
+        const checks = [
+            ...document.querySelectorAll('[data-check]')
+        ];
+
+        const progress =
+            document.getElementById('progress');
+
+        const progressText =
+            document.getElementById('progressText');
+
+
+        /* ==========================================
+           CHECKLIST PROGRESS
+        ========================================== */
+
+        function updateProgress() {
+
+            const done =
+                checks.filter(
+                    c => c.checked
+                ).length;
+
+            const pct =
+                checks.length
+                    ? done / checks.length * 100
+                    : 0;
+
+            progress.style.width =
+                pct + '%';
+
+            progressText.textContent =
+                `${done} / ${checks.length} checklist items completed`;
+
+            localStorage.setItem(
+                'daa_unit1_checks',
+                JSON.stringify(
+                    checks.map(
+                        c => c.checked
+                    )
+                )
+            );
+
+        }
+
+
+        /* ==========================================
+           LOAD SAVED CHECKLIST
+        ========================================== */
+
+        const saved =
+            JSON.parse(
+                localStorage.getItem(
+                    'daa_unit1_checks'
+                ) || '[]'
+            );
+
+
+        checks.forEach(
+            (checkbox, index) => {
+
+                if (saved[index]) {
+                    checkbox.checked = true;
+                }
+
+                checkbox.addEventListener(
+                    'change',
+                    updateProgress
+                );
+
+            }
+        );
+
+
+        updateProgress();
+
+
+        /* ==========================================
+           EXPAND / COLLAPSE
+        ========================================== */
+
+        function toggleAll(open) {
+
+            cards.forEach(
+                card => {
+                    card.open = open;
+                }
+            );
+
+        }
+
+
+        /* ==========================================
+           SEARCH
+        ========================================== */
+
+        document
+            .getElementById('search')
+            .addEventListener(
+                'input',
+                event => {
+
+                    const query =
+                        event.target.value
+                            .toLowerCase()
+                            .trim();
+
+
+                    cards.forEach(
+                        card => {
+
+                            const text =
+                                card.innerText
+                                    .toLowerCase();
+
+                            const title =
+                                (
+                                    card.dataset.title || ''
+                                ).toLowerCase();
+
+
+                            const match =
+                                !query ||
+                                text.includes(query) ||
+                                title.includes(query);
+
+
+                            card.classList.toggle(
+                                'hidden',
+                                !match
+                            );
+
+
+                            if (query && match) {
+
+                                card.open = true;
+
+                            }
+
+                        }
+                    );
+
+                }
+            );
+
+    </script>
+
+</body>
+
+</html>
